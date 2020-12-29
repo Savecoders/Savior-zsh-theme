@@ -52,7 +52,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[yellow]%} Commit %{$fg_bold[cyan]%}";
 #git Info Status 
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[red]%} ";
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} "; #%{$fg_bold[magenta]%}🔥
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}";
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%} ";
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[yellow]%}Merge %{$fg_bold[cyan]%}";
 
 # update git status
