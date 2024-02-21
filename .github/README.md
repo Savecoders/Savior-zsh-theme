@@ -18,9 +18,9 @@ In your `~/.zshrc` file, set `ZSH_THEME="simpleTheme"`.
 
   # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
   # .oh-my-zsh/themes/
-  ZSH_THEME="simpleTheme"
+  ZSH_THEME="Savior"
 ```
 
 ## License ⚓
 
-MIT [LICENSE](https://github.com/Savecoders/simpleTheme-zsh-theme/blob/master/LICENSE 'License')
+MIT [LICENSE](https://github.com/Savecoders/Savior-zsh-theme/blob/master/LICENSE 'License')

@@ -1,4 +1,4 @@
-# !Arrow ZSH Theme
+# !Savior ZSH Theme
 
 #The new Line
 _linestop=$'\n';
@@ -135,7 +135,12 @@ function precmd() {
     if [ $timer ]; then
         now=$(($(date +%s%0N)/1000000))
         elapsed=$(($now-$timer))
-        timer_show=" ${elapsed}ms"
+        if [ $elapsed -ge 1000 ]; then
+            elapsed=$(($elapsed/1000))
+            timer_show=" ${elapsed}s"
+        else
+            timer_show=" ${elapsed}ms"
+        fi
         unset timer
     fi
 
