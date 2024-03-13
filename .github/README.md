@@ -7,20 +7,17 @@
 ## Installation 📦
 
 ```
-  cp -r ../simpleTheme-zsh-theme/* ~/.oh-my-zsh/themes/
+  git clone https://github.com/Savecoders/Savior-zsh-theme.git
+  cp -r ./Savior-zsh-theme/* ~/.oh-my-zsh/themes/
 ```
 
-In your `~/.zshrc` file, set `ZSH_THEME="simpleTheme"`.
+In your `~/.zshrc` file, set `ZSH_THEME="Savior"`.
 
 ```
-  # Path to your oh-my-zsh installation.
-  export ZSH="$HOME/.oh-my-zsh"
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-  # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-  # .oh-my-zsh/themes/
-  ZSH_THEME="Savior"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# .oh-my-zsh/themes/
+ZSH_THEME="Savior"
 ```
-
-## License ⚓
-
-MIT [LICENSE](https://github.com/Savecoders/Savior-zsh-theme/blob/master/LICENSE 'License')
