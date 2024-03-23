@@ -17,6 +17,14 @@
 
 <h2 align="center" style="font-weight:mediun; padding:40px;"> 🪶 My Simple and Minimalist Zsh Theme</h2>
 
+## 📦 Installation Manual
+
+Recomend use the install Script
+
+```bash
+  chmod +x ./install.sh && ./install.sh
+```
+
 ## 📥 Install ohmyzsh
 
 ```bash
@@ -26,7 +34,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 > [!TIP]
 > This is basic install recommended in documentation: [ohmyz](https://ohmyz.sh/#install)
 
-## 📦 Installation
+## 🦽 Installation Manual
+
+Recomend use the Script
+
+```bash
+  chmod +x ./install.sh && ./install.sh
+```
 
 ```bash
   git clone https://github.com/Savecoders/Savior-zsh-theme.git
