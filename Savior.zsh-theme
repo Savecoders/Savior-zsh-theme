@@ -11,6 +11,7 @@ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}  %{$fg_bold[red]%}  ";
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} ";
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[blue]%}";
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[yellow]%} Commit %{$fg_bold[cyan]%}" ;
+
 #git Info Status 
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[red]%} ";
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%}  "; #%{$fg_bold[magenta]%}🔥
@@ -151,15 +152,15 @@ function precmd() {
     # update_command_status
     update_command_status $last_cmd_result;
 }
-# set option
-setopt PROMPT_SUBST;
-TMOUT=1;
+# # set option
+# setopt PROMPT_SUBST;
+# TMOUT=1;
 
-function TRAPALRM() {
-    if [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; then
-        zle reset-prompt;
-    fi
-}
+# function TRAPALRM() {
+#     if [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; then
+#         zle reset-prompt;
+#     fi
+# }
 
 #PROMPTS
 PROMPT='$(init_line)$(command_status) $(get_directory)${GIT_INFO}${GIT_STATUS}$_linestop';

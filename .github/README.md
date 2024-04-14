@@ -66,3 +66,7 @@ This images is using my zsh-theme in kitty terminal config [Dotfiles](https://gi
 ![](assets/images/screenshot_gruvbox.png)
 ![](assets/images/screenshot_dark.png)
 ![](assets/images/screenshot_light.png)
+
+## License
+
+[MIT License](../LICENSE)
