@@ -7,16 +7,17 @@ _linedown=$'\e[1B';
 timer_show=" 0ms";
 
 # git Info 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}  %{$fg_bold[red]%}  ";
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%}  %{$fg_bold[magenta]%}";
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} ";
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[blue]%}";
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[yellow]%} Commit %{$fg_bold[cyan]%}" ;
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} 󰈸";
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%}  " ;
 
 #git Info Status 
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[red]%} ";
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%}  "; #%{$fg_bold[magenta]%}🔥
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%} ";
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[yellow]%}Merge %{$fg_bold[cyan]%} ";
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[yellow]%}󰊢 ";
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} ";
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[magenta]%} ";
+ZSH_THEME_GIT_PROMPT_MERGED="%{$fg_bold[cyan]%}Merge %{$fg_bold[blue]%} ";
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[blue]%} ";
 
 # user names
 function users_name() {
@@ -44,7 +45,7 @@ function get_directory() {
 # time
 function real_time() {
     local color="%{$fg_no_bold[blue]%}";                   
-    local time="󰥔 $(date +%H:%M:%S)";
+    local time="󰥔 $(date +%H:%M)";
     echo "${color}${time}%{$reset_color%}";
 }
 
@@ -63,7 +64,7 @@ function init_second_line(){
 # final line
 function final_line(){
     local color="%{$fg_bold[magenta]%}"; 
-    local simbol="󱦟";
+    local simbol="󰔚";
     echo "${color}${simbol}$1%{$reset_color%}";    
 }
 
@@ -80,23 +81,30 @@ function update_git_info() {
     GIT_INFO=$(git_prompt_info);
 }
 
+function git_status() {
+    echo "${GIT_STATUS}"
+}
+function git_info() {
+    echo "${GIT_INFO}"
+}
+
 # command
 function update_command_status() {
-    local user="";
-    local line="";
+    local user_icon="";
+    local arrow="";
     local default="";
     local color_reset="%{$reset_color%}";
     local reset_font="%{$fg_no_bold[white]%}";
 
     if $1;
     then
-        user="%{$fg_bold[yellow]%} ";
-        line="%{$fg_bold[green]%} ";# 
+        user_icon="%{$fg_bold[yellow]%}";
+        arrow="%{$fg_bold[yellow]%}%{$fg_bold[green]%}";
     else
-        user="%{$fg_bold[red]%} ";
-        line="%{$fg_bold[red]%} ";#
+        user_icon="%{$fg_bold[red]%}";
+        arrow="%{$fg_bold[red]%}%{$fg_bold[red]%}";
     fi
-    default="${user}$(users_name)${line}";
+    default="${user_icon} $(users_name) ${arrow}";
     COMMAND_STATUS="${default}${reset_font}${color_reset}";
 }
 update_command_status true;
@@ -163,6 +171,6 @@ function precmd() {
 # }
 
 #PROMPTS
-PROMPT='$(init_line)$(command_status) $(get_directory)${GIT_INFO}${GIT_STATUS}$_linestop';
+PROMPT='$(init_line)$(command_status) $(get_directory) $(git_prompt_info)$(git_prompt_status)$_linestop';
 RPROMPT='%{${_lineup}%}$(real_time) $(final_line ${timer_show} ) %{${_linedown}%}';
 PROMPT+='$(init_second_line)';
