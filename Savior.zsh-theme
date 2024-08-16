@@ -51,14 +51,14 @@ function real_time() {
 
 # line
 function init_line(){
-    local color="%{$fg_no_bold[black]%}"; 
-    local simbol="󱞬 ";
+    local color="%{$fg_no_bold[blue]%}"; 
+    local simbol=" ";
     echo "${color}${simbol}%{$reset_color%}";
 }
 
 function init_second_line(){
     local color="%{$fg_no_bold[black]%}"; 
-    local simbol="󱞪 ";
+    local simbol=" ";
     echo "${color}${simbol}%{$reset_color%}";
 }
 # final line
@@ -99,10 +99,10 @@ function update_command_status() {
     if $1;
     then
         user_icon="%{$fg_bold[yellow]%}";
-        arrow="%{$fg_bold[yellow]%}%{$fg_bold[green]%}";
+        arrow="%{$fg_bold[green]%}";
     else
         user_icon="%{$fg_bold[red]%}";
-        arrow="%{$fg_bold[red]%}%{$fg_bold[red]%}";
+        arrow="%{$fg_bold[red]%}";
     fi
     default="${user_icon} $(users_name) ${arrow}";
     COMMAND_STATUS="${default}${reset_font}${color_reset}";
