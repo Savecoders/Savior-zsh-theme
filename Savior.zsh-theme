@@ -51,14 +51,14 @@ function real_time() {
 
 # line
 function init_line(){
-    local color="%{$fg_no_bold[blue]%}"; 
-    local simbol=" ";
+    local color="%{$fg_no_bold[black]%}"; 
+    local simbol="󱞬 ";
     echo "${color}${simbol}%{$reset_color%}";
 }
 
 function init_second_line(){
     local color="%{$fg_no_bold[black]%}"; 
-    local simbol=" ";
+    local simbol="󱞪 ";
     echo "${color}${simbol}%{$reset_color%}";
 }
 # final line
