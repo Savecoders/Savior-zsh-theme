@@ -51,6 +51,13 @@ function node_prompt_version {
     fi
 }
 
+# docker
+function docker_prompt {
+    local color="%{$fg_no_bold[blue]%}";
+    local docker_v="󰡨 $(dock_status)";
+    echo "${color}${docker_v}%{$reset_color%}";
+}
+
 # time
 function real_time() {
     local color="%{$fg_no_bold[blue]%}";
@@ -181,5 +188,5 @@ function precmd() {
 
 #PROMPTS
 PROMPT='$(init_line)$(command_status) $(get_directory) $(git_prompt_info)$(git_prompt_status)$_linestop';
-RPROMPT='%{${_lineup}%} $(node_prompt_version) $(real_time) $(final_line ${timer_show} ) %{${_linedown}%}';
+RPROMPT='%{${_lineup}%} $(docker_prompt) $(node_prompt_version) $(real_time) $(final_line ${timer_show} ) %{${_linedown}%}';
 PROMPT+='$(init_second_line)';
