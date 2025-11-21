@@ -1,5 +1,8 @@
 # !Savior ZSH Theme
 
+# time module load
+zmodload zsh/datetime
+
 #The new Line
 _linestop=$'\n';
 _lineup=$'\e[1A';
@@ -148,10 +151,31 @@ function current_time_millis() {
 }
 
 function preexec() {
-    timer=$(($(date +%s%0N)/1000000))
-    COMMAND_TIME_BEIGIN="$(current_time_millis)";
+    typeset -g _savior_cmd_start=$EPOCHREALTIME
 }
 
+function calculate_execution_time() {
+    integer elapsed
+    local precision_diff
+
+    if [[ -n $_savior_cmd_start ]]; then
+        # Calculate difference using native Zsh arithmetic
+        precision_diff=$(( EPOCHREALTIME - _savior_cmd_start ))
+
+        # Convert to ms or seconds to display
+        if (( precision_diff > 1 )); then
+            printf -v timer_show " %.2fs" $precision_diff
+        else
+            integer ms=$(( precision_diff * 1000 ))
+                timer_show=" ${ms}ms"
+        fi
+        unset _savior_cmd_start
+    else
+        timer_show=" 0ms"
+    fi
+}
+#
+setopt PROMPT_SUBST
 function precmd() {
     # last_cmd
     local last_cmd_return_code=$?;
@@ -164,17 +188,7 @@ function precmd() {
         last_cmd_result=false;
     fi
 
-    if [ $timer ]; then
-        now=$(($(date +%s%0N)/1000000))
-        elapsed=$(($now-$timer))
-        if [ $elapsed -ge 1000 ]; then
-            elapsed=$(($elapsed/1000))
-            timer_show=" ${elapsed}s"
-        else
-            timer_show=" ${elapsed}ms"
-        fi
-        unset timer
-    fi
+    calculate_execution_time;
 
     # update_git_status
     update_git_status;
