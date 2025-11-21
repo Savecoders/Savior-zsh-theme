@@ -7,7 +7,7 @@ _linedown=$'\e[1B';
 timer_show=" 0ms";
 
 # git Info
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%}  %{$fg_bold[magenta]%}";
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%}   %{$fg_bold[magenta]%}";
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} ";
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} 󰈸";
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%}  " ;
@@ -46,7 +46,7 @@ function get_directory() {
 function node_prompt_version {
     if which node &> /dev/null; then
         local color="%{$fg_no_bold[cyan]%}";
-        local node_v=" $(node -v)";
+        local node_v="  $(node -v)";
         echo "${color}${node_v}%{$reset_color%}";
     fi
 }
@@ -54,14 +54,14 @@ function node_prompt_version {
 # docker
 function docker_prompt {
     local color="%{$fg_no_bold[blue]%}";
-    local docker_v="󰡨 $(dock_status)";
+    local docker_v="󰡨  $(dock_status)";
     echo "${color}${docker_v}%{$reset_color%}";
 }
 
 # time
 function real_time() {
     local color="%{$fg_no_bold[blue]%}";
-    local time="󰥔 $(date +%H:%M)";
+    local time="󰥔  $(date +%H:%M)";
     echo "${color}${time}%{$reset_color%}";
 }
 
@@ -77,6 +77,7 @@ function init_second_line(){
     local simbol="󱞪 ";
     echo "${color}${simbol}%{$reset_color%}";
 }
+
 # final line
 function final_line(){
     local color="%{$fg_bold[magenta]%}";
@@ -92,6 +93,7 @@ function update_git_status() {
         GIT_STATUS="Git not found"
     fi
 }
+
 # update git info
 function update_git_info() {
     GIT_INFO=$(git_prompt_info);
@@ -100,6 +102,7 @@ function update_git_info() {
 function git_status() {
     echo "${GIT_STATUS}"
 }
+
 function git_info() {
     echo "${GIT_INFO}"
 }
@@ -123,6 +126,7 @@ function update_command_status() {
     default="${user_icon} $(users_name) ${arrow}";
     COMMAND_STATUS="${default}${reset_font}${color_reset}";
 }
+
 update_command_status true;
 
 function command_status() {
@@ -142,14 +146,17 @@ function current_time_millis() {
     fi
     echo $time_millis;
 }
+
 function preexec() {
     timer=$(($(date +%s%0N)/1000000))
     COMMAND_TIME_BEIGIN="$(current_time_millis)";
 }
+
 function precmd() {
     # last_cmd
     local last_cmd_return_code=$?;
     local last_cmd_result=true;
+
     if [ "$last_cmd_return_code" = "0" ];
     then
         last_cmd_result=true;
@@ -176,6 +183,8 @@ function precmd() {
     # update_command_status
     update_command_status $last_cmd_result;
 }
+
+# TODO: refactor TIME RENDER TRAPALRM
 # # set option
 # setopt PROMPT_SUBST;
 # TMOUT=1;
