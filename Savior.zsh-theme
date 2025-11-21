@@ -11,17 +11,17 @@ _linedown=$'\e[1B'
 timer_show=" 0ms"
 
 # git Info
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%}   %{$fg_bold[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%} %{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} 󰈸"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%}  "
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%} "
 
 #git Info Status
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[yellow]%}󰊢 "
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} "
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[magenta]%} "
-ZSH_THEME_GIT_PROMPT_MERGED="%{$fg_bold[cyan]%}Merge %{$fg_bold[blue]%} "
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[blue]%} "
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[yellow]%} 󰝒"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} 󱪡"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[magenta]%} 󱇧"
+ZSH_THEME_GIT_PROMPT_MERGED="%{$fg_bold[cyan]%}Merge %{$fg_bold[blue]%} "
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[cyan]%} "
 
 # user names
 function users_name() {
@@ -56,20 +56,29 @@ function node_prompt_version {
       local node_v="  $(node -v)"
       echo "${color}${node_v}%{$reset_color%}"
     fi
+  else
+    echo ""
   fi
 }
 
 # docker
 function docker_prompt {
   local color="%{$fg_no_bold[blue]%}"
-  local docker_v="󰡨  $(dock_status)"
-  echo "${color}${docker_v}%{$reset_color%}"
+
+  local icon=""
+
+  if is_dock_project; then
+    icon="󰡨"
+  fi
+
+  local docker_prompt="${icon} $(dock_status)"
+  echo "${color}${docker_prompt}%{$reset_color%}"
 }
 
 # time
 function real_time() {
   local color="%{$fg_no_bold[blue]%}"
-  local time="󰥔  $(date +%H:%M)"
+  local time="󰥔 $(date +%H:%M)"
   echo "${color}${time}%{$reset_color%}"
 }
 
@@ -186,18 +195,7 @@ function precmd() {
   update_command_status $last_cmd_result
 }
 
-# TODO: refactor TIME RENDER TRAPALRM
-# # set option
-# setopt PROMPT_SUBST;
-# TMOUT=1;
-
-# function TRAPALRM() {
-#     if [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; then
-#         zle reset-prompt;
-#     fi
-# }
-
 #PROMPTS
 PROMPT='$(init_line)$(command_status) $(get_directory) $(git_prompt_info)$(git_prompt_status)$_linestop'
-RPROMPT='%{${_lineup}%} $(docker_prompt) $(node_prompt_version) $(real_time) $(final_line ${timer_show} ) %{${_linedown}%}'
+RPROMPT='%{${_lineup}%} $(docker_prompt) $(node_prompt_version) $(real_time) $(final_line ${timer_show}) %{${_linedown}%}'
 PROMPT+='$(init_second_line)'
