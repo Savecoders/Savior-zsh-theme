@@ -11,17 +11,28 @@ _linedown=$'\e[1B'
 timer_show=" 0ms"
 
 # git Info
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[black]%} %{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%} %{$fg_bold[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} 󰈸"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%} "
 
 #git Info Status
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[yellow]%} 󰝒"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[green]%} 󰝒"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} 󱪡"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[magenta]%} 󱇧"
 ZSH_THEME_GIT_PROMPT_MERGED="%{$fg_bold[cyan]%}Merge %{$fg_bold[blue]%} "
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[cyan]%} "
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[cyan]%} "
+ZSH_THEME_GIT_PROMPT_DIVERGED="%{$fb_bold[cyan]%} "
+ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fb_bold[cyan]%} "
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%} "
+ZSH_THEME_GIT_PROMPT_REMOTE_EXISTS="%{$fb_bold[black]%} "
+ZSH_THEME_GIT_PROMPT_REMOTE_MISSING="%{$fb_bold[red]%} 󱓎"
+
+# git commits ahead/behind
+ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fb_bold[black]%} "
+ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{$fb_bold[black]%} "
+ZSH_THEME_GIT_COMMITS_BEHIND_SUFFIX="%{$reset_color%}"
 
 # user names
 function users_name() {
