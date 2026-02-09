@@ -11,28 +11,28 @@ _linedown=$'\e[1B'
 timer_show=" 0ms"
 
 # git Info
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%} %{$fg_bold[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} 󰈸"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%} "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}%B %F{magenta}%B"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{red}%B 󰈸"
+ZSH_THEME_GIT_PROMPT_CLEAN="%F{blue}%B "
 
 #git Info Status
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[green]%} 󰝒"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} 󱪡"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[magenta]%} 󱇧"
-ZSH_THEME_GIT_PROMPT_MERGED="%{$fg_bold[cyan]%}Merge %{$fg_bold[blue]%} "
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}UNMerge %{$fg_no_bold[cyan]%} "
-ZSH_THEME_GIT_PROMPT_DIVERGED="%{$fb_bold[cyan]%} "
-ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fb_bold[cyan]%} "
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%} "
-ZSH_THEME_GIT_PROMPT_REMOTE_EXISTS="%{$fb_bold[black]%} "
-ZSH_THEME_GIT_PROMPT_REMOTE_MISSING="%{$fb_bold[red]%} 󱓎"
+ZSH_THEME_GIT_PROMPT_ADDED="%F{green}%B 󰝒"
+ZSH_THEME_GIT_PROMPT_DELETED="%F{red}%B 󱪡"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%F{magenta}%B 󱇧"
+ZSH_THEME_GIT_PROMPT_MERGED="%F{cyan}%B Merge %F{blue}%B "
+ZSH_THEME_GIT_PROMPT_UNMERGED="%F{red}%B UNMerge %F{cyan}% "
+ZSH_THEME_GIT_PROMPT_DIVERGED="%F{cyan}%B "
+ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%F{cyan}%B "
+ZSH_THEME_GIT_PROMPT_RENAMED="%F{blue}%B "
+ZSH_THEME_GIT_PROMPT_REMOTE_EXISTS="%F{black}%B "
+ZSH_THEME_GIT_PROMPT_REMOTE_MISSING="%F{red}%B 󱓎"
 
 # git commits ahead/behind
-ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fb_bold[black]%} "
-ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{$fb_bold[black]%} "
-ZSH_THEME_GIT_COMMITS_BEHIND_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%F{black}%B "
+ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="%f%b"
+ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%F{black}%B "
+ZSH_THEME_GIT_COMMITS_BEHIND_SUFFIX="%f%b"
 
 # user names
 function users_name() {
@@ -40,9 +40,9 @@ function users_name() {
   local user_name=$(git_current_user_name)
 
   if [[ -z $git_info || -z $user_name ]]; then
-    echo "%{$fg_bold[white]%}%n%{$reset_color%}"
+    echo "%F{white}%n%f"
   else
-    echo "%{$fg_bold[white]%}% $user_name%{$reset_color%}"
+    echo "%F{white}% $user_name%f"
   fi
 }
 
@@ -51,21 +51,20 @@ function get_directory() {
   local git_info=$(git_prompt_info)
 
   if [[ -z $git_info ]]; then
-    echo "%{$fg_no_bold[cyan]%} %c%{$reset_color%}"
+    echo "%F{cyan}%   %c%f"
   else
-    echo "%{$fg_no_bold[cyan]%} %c%{$reset_color%}"
+    echo "%F{cyan}%   %c%f"
   fi
 }
 
 # node version
 function node_prompt_version {
-
   # local options files
   if [[ -f package.json || -f yarn.lock || -f pnpm-lock.yaml || -f tsconfig.json ]]; then
     if command -v node >/dev/null 2>&1; then
-      local color="%{$fg_no_bold[cyan]%}"
+      local color="%F{cyan}% "
       local node_v="  $(node -v)"
-      echo "${color}${node_v}%{$reset_color%}"
+      echo "${color}${node_v}%f"
     fi
   else
     echo ""
@@ -74,8 +73,7 @@ function node_prompt_version {
 
 # docker
 function docker_prompt {
-  local color="%{$fg_no_bold[blue]%}"
-
+  local color="%F{blue}% "
   local icon=""
 
   if is_dock_project; then
@@ -83,34 +81,34 @@ function docker_prompt {
   fi
 
   local docker_prompt="${icon} $(dock_status)"
-  echo "${color}${docker_prompt}%{$reset_color%}"
+  echo "${color}${docker_prompt}%f"
 }
 
 # time
 function real_time() {
-  local color="%{$fg_no_bold[blue]%}"
+  local color="%F{blue}% "
   local time="󰥔 $(date +%H:%M)"
-  echo "${color}${time}%{$reset_color%}"
+  echo "${color}${time}%f"
 }
 
 # line
 function init_line() {
-  local color="%{$fg_no_bold[black]%}"
+  local color="%F{black}% "
   local simbol="󱞬 "
-  echo "${color}${simbol}%{$reset_color%}"
+  echo "${color}${simbol}%f"
 }
 
 function init_second_line() {
-  local color="%{$fg_no_bold[black]%}"
+  local color="%F{black}% "
   local simbol="󱞪 "
-  echo "${color}${simbol}%{$reset_color%}"
+  echo "${color}${simbol}%f"
 }
 
 # final line
 function final_line() {
-  local color="%{$fg_bold[magenta]%}"
+  local color="%F{magenta}%B "
   local simbol="󰔚"
-  echo "${color}${simbol}$1%{$reset_color%}"
+  echo "${color}${simbol}$1%f"
 }
 
 # update git status
@@ -140,15 +138,15 @@ function update_command_status() {
   local user_icon=""
   local arrow=""
   local default=""
-  local color_reset="%{$reset_color%}"
-  local reset_font="%{$fg_no_bold[white]%}"
+  local color_reset="%f%b"
+  local reset_font="%F{white}% "
 
   if $1; then
-    user_icon="%{$fg_bold[yellow]%}"
-    arrow="%{$fg_bold[green]%}"
+    user_icon="%F{yellow}%B"
+    arrow="%F{green}%B"
   else
-    user_icon="%{$fg_bold[red]%}"
-    arrow="%{$fg_bold[red]%}"
+    user_icon="%F{red}%B"
+    arrow="%F{red}%B"
   fi
   default="${user_icon} $(users_name) ${arrow}"
   COMMAND_STATUS="${default}${reset_font}${color_reset}"
